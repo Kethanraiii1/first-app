@@ -1,4 +1,4 @@
-name: Deploy Portfolio
+name: Deploy Static Portfolio
 
 on:
   push:
@@ -8,43 +8,14 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build project
-        run: npm run build  # or whatever build command your project uses
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist  # Change if your build output is somewhere else
-
+          publish_dir: ./  # Root folder with your HTML/CSS/JS
           
-#   notify:
-#     needs: deploy
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Send Email with Link
-#         uses: dawidd6/action-send-mail@v3
-#         with:
-#           server_address: smtp.gmail.com
-#           server_port: 465
-#           username: Kethan rai
-#           password: k2@123
-#           subject: "Portfolio Deployed!"
-#           to: kethanraiii@gmail.com
-#           from: GitHub Actions kethanraii@gmail.com
-#           body: |
-#             Your portfolio has been deployed!
-#             Check it out: https://kethanraiii1.github.io/first-app/
+  
